@@ -17,9 +17,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('disabled')->defaultValue('%kernel.debug%')->end()
-            ->scalarNode('piwik_host')->defaultValue('piwik.webfactory.de')->info('Full URL to the piwik host (i.e. piwik.webfactory.de)')->end()
-            ->booleanNode('use_cacheable_tracking_script')->defaultTrue()->info('Whether to use piwik.js or js/. The later one is served with headers that allow HTTP-Caching.')->end()
-            ->scalarNode('site_id')->isRequired()->info('The site ID found in the piwik control panel')->end()
+            ->scalarNode('piwik_host')->defaultValue('piwik.webfactory.de')->end()
+            ->booleanNode('use_cacheable_tracking_script')->defaultTrue()->end()
+            ->scalarNode('site_id')->isRequired()->end()
             ->end();
 
         return $treeBuilder;
