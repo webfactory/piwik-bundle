@@ -1,0 +1,24 @@
+{
+	"name": "webfactory/pwik-bundle",
+	"type": "symfony-bundle",
+	"description": "Symfony2 Bundle that adds a twig-function for the Piwik tracking code.",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "webfactory GmbH",
+			"email": "info@webfactory.de",
+			"homepage": "http://www.webfactory.de",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": { "Webfactory\\Bundle\\PiwikBundle\\": "" }
+	},
+	"require":{
+		"twig/twig": "~1.0",
+		"symfony/symfony": "~2.2"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.0"
+	}
+}
