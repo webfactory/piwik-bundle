@@ -38,6 +38,20 @@ At the end of your `base.html.twig` insert
 
 	{{ piwik_code() }}
 
+
+Configuration
+-------------
+You can configure the bundle in your config.yml
+Only the site_id parameter is required. The defaults look like this:
+
+	webfactory_piwik:
+	    site_id: 1                           #No default, must be set to the site id found in the piwik control panel
+	    disabled: %kernel.debug%             #Usually, you only want to include the tracking code in a production environment
+	    piwik_host: piwik.webfactory.de      #Full URL to the piwik host
+	    use_cacheable_tracking_script: true  #Whether to use piwik.js or js/. The later one is served with headers that allow HTTP-Caching.
+	   
+
+
 Credits, Copyright and License
 ------------------------------
 Copyright 2012-2014 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
