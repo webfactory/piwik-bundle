@@ -22,6 +22,6 @@ class WebfactoryPiwikExtension extends Extension
         foreach (array('disabled', 'piwik_host', 'use_cacheable_tracking_script', 'site_id') as $configParameterKey) {
             $container->setParameter("webfactory_piwik.$configParameterKey", $config[$configParameterKey]);
         }
-    }
+    } 
 
 }
