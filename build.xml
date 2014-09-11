@@ -112,6 +112,7 @@
             <arg value="--coverage-html=${basedir}/build/coverage" />
             <arg value="--coverage-clover=${basedir}/build/logs/clover.xml" />
             <arg value="--log-junit=${basedir}/build/logs/junit.xml" />
+            <arg value="Tests" />
         </exec>
     </target>
 
