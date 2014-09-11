@@ -4,7 +4,6 @@ namespace Webfactory\Bundle\PiwikBundle\Twig;
 
 class Extension extends \Twig_Extension
 {
-
     protected $disabled;
     protected $siteId;
     protected $piwikHost;
@@ -68,5 +67,4 @@ EOT;
             return 'piwik.js';
         }
     }
-
 }

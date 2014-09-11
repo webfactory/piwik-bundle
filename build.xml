@@ -53,7 +53,7 @@
         <apply executable="php" failonerror="true">
             <arg value="-l" />
 
-            <fileset dir="${basedir}/src">
+            <fileset dir="${basedir}">
                 <include name="**/*.php" />
                 <modified />
             </fileset>
@@ -66,7 +66,7 @@
             <arg value="${basedir}/build/logs/phploc.xml" />
             <arg value="--log-csv" />
             <arg value="${basedir}/build/logs/phploc.csv" />
-            <arg path="${basedir}/src" />
+            <arg value="${basedir}" />
         </exec>
     </target>
 
@@ -75,7 +75,7 @@
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
             <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
             <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-            <arg path="${basedir}/src" />
+            <arg value="${basedir}" />
         </exec>
     </target>
 
@@ -87,6 +87,8 @@
             <arg value="cleancode,codesize,controversial,design,naming,unusedcode" />
             <arg value="--reportfile" />
             <arg value="${basedir}/build/logs/pmd.xml" />
+            <arg value="--exclude" />
+            <arg value="vendor,build" />
         </exec>
     </target>
 
@@ -95,7 +97,8 @@
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
             <arg value="--standard=PSR2" />
-            <arg path="${basedir}/src" />
+            <arg value="--ignore=vendor,build" />
+            <arg value="${basedir}" />
         </exec>
     </target>
 
@@ -103,7 +106,9 @@
         <exec executable="vendor/bin/phpcpd">
             <arg value="--log-pmd" />
             <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-            <arg path="${basedir}/src" />
+            <arg value="--exclude=vendor" />
+            <arg value="--exclude=build" />
+            <arg value="${basedir}" />
         </exec>
     </target>
 
@@ -112,6 +117,7 @@
             <arg value="--coverage-html=${basedir}/build/coverage" />
             <arg value="--coverage-clover=${basedir}/build/logs/clover.xml" />
             <arg value="--log-junit=${basedir}/build/logs/junit.xml" />
+            <arg value="Tests" />
         </exec>
     </target>
 
