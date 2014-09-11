@@ -47,7 +47,7 @@ You can configure the bundle in your `config.yml`. Full Example:
 	    site_id: 1                           # Required, no default. Must be set to the site id found in the piwik control panel
 	    disabled: %kernel.debug%             # Required, has default. Usually, you only want to include the tracking code in a production environment
 	    piwik_host: piwik.webfactory.de      # Required. no default. Hostname and path to the piwik host.
-	    use_cacheable_tracking_script: true  # Required, has default. Whether to use piwik.js or js/. The later one is served with headers that allow HTTP-Caching.
+	    use_cacheable_tracking_script: true  # Required, has default. Whether to use piwik.js or js/. The latter one is served with headers that allow HTTP-Caching.
 
 
 
