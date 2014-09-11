@@ -37,3 +37,10 @@ Usage
 At the end of your `base.html.twig` insert
 
 	{{ piwik_code() }}
+
+Credits, Copyright and License
+------------------------------
+Copyright 2012-2014 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
+
+- <http://www.webfactory.de>
+- <http://twitter.com/webfactory>
