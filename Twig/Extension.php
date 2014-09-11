@@ -28,7 +28,7 @@ class Extension extends \Twig_Extension
     public function piwikCode()
     {
         if ($this->disabled) {
-            return '<!-- Piwik is disabled due to webfactory_piwik.disabled=false in your configuration -->';
+            return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
         }
 
         $piwikCode = <<<EOT
@@ -70,4 +70,3 @@ EOT;
     }
 
 }
- 
