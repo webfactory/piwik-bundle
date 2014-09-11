@@ -1,7 +1,10 @@
 piwik-bundle
 ============
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/?branch=master)
+
 Symfony2 Bundle that adds a twig-function for the Piwik tracking code
+
 
 Installation
 ------------
