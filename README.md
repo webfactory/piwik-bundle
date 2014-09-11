@@ -6,7 +6,7 @@ piwik-bundle
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b/mini.png)](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b)
 
-Symfony2 Bundle that adds a twig-function for the Piwik tracking code
+Symfony2 Bundle providing a Twig function for conditional Piwik tracking code depending on the runtime environment.
 
 
 Installation
@@ -37,5 +37,3 @@ Usage
 At the end of your `base.html.twig` insert
 
 	{{ piwik_code() }}
-
-
