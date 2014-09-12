@@ -36,7 +36,7 @@ And enable the bundle in `app/AppKernel.php`:
 
 Usage
 -----
-Somewhere in your views, right before the closing </body> tag, insert 
+Somewhere in your views, right before the closing &lt;/body&gt; tag, insert 
 
 	{{ piwik_code() }}
 
