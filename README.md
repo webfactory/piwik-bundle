@@ -1,4 +1,4 @@
-piwik-bundle
+![webfactory Logo](http://www.webfactory.de/bundles/webfactorytwiglayout/img/logo.png) WebfactoryPiwikBundle
 ============
 
 [![Build Status](https://travis-ci.org/webfactory/piwik-bundle.svg?branch=master)](https://travis-ci.org/webfactory/piwik-bundle)
@@ -6,7 +6,9 @@ piwik-bundle
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b/mini.png)](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b)
 
-Symfony2 Bundle providing a Twig function for conditional Piwik tracking code depending on the runtime environment.
+A Symfony2 Bundle that helps you to use the Piwik Open Analytics Platform with your project.
+
+It contains a Twig function that can insert the tracking code into your website. Plus, you can turn it off with a simple configuration switch so you don't track your dev environment.
 
 
 Installation
@@ -15,7 +17,7 @@ Simply add the following to your composer.json (see http://getcomposer.org/):
 
     "require" :  {
         // ...
-        "webfactory/piwik-bundle": "@stable"
+        "webfactory/piwik-bundle": "~1.0"
     }
 
 And enable the bundle in `app/AppKernel.php`:
@@ -34,7 +36,7 @@ And enable the bundle in `app/AppKernel.php`:
 
 Usage
 -----
-At the end of your `base.html.twig` insert
+Somewhere in your views, right before the closing </body> tag, insert 
 
 	{{ piwik_code() }}
 
@@ -44,9 +46,9 @@ Configuration
 You can configure the bundle in your `config.yml`. Full Example:
 
 	webfactory_piwik:
-	    site_id: 1                           # Required, no default. Must be set to the site id found in the piwik control panel
+	    site_id: 1                           # Required, no default. Must be set to the site id found in the Piwik control panel
 	    disabled: %kernel.debug%             # Required, has default. Usually, you only want to include the tracking code in a production environment
-	    piwik_host: piwik.webfactory.de      # Required. no default. Hostname and path to the piwik host.
+	    piwik_host: my.piwik.hostname        # Required. no default. Hostname and path to the piwik host.
 	    use_cacheable_tracking_script: true  # Required, has default. Whether to use piwik.js or js/. The latter one is served with headers that allow HTTP-Caching.
 
 
