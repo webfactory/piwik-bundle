@@ -7,14 +7,14 @@ class Extension extends \Twig_Extension
     protected $disabled;
     protected $siteId;
     protected $piwikHost;
-    protected $useCacheableTrackingScript;
+    protected $trackerPath;
 
-    function __construct($disabled, $siteId, $piwikHost, $useCacheableTrackingScript)
+    function __construct($disabled, $siteId, $piwikHost, $trackerPath)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
         $this->piwikHost = $piwikHost;
-        $this->useCacheableTrackingScript = $useCacheableTrackingScript;
+        $this->trackerPath = $trackerPath;
     }
 
     public function getFunctions()
@@ -42,7 +42,7 @@ _paq.push(["enableLinkTracking"]);
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
     _paq.push(["setSiteId", "{$this->siteId}"]);
     var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-    g.defer=true; g.async=true; g.src=u+"{$this->getScriptPath()}"; s.parentNode.insertBefore(g,s);
+    g.defer=true; g.async=true; g.src=u+"{$this->trackerPath}"; s.parentNode.insertBefore(g,s);
 })();
 //]]></script>
 <!-- End Piwik Code -->
@@ -57,14 +57,5 @@ EOT;
     public function getName()
     {
         return 'webfactory_piwik';
-    }
-
-    protected function getScriptPath()
-    {
-        if ($this->useCacheableTrackingScript) {
-            return 'js/';
-        } else {
-            return 'piwik.js';
-        }
     }
 }

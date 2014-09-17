@@ -8,7 +8,7 @@
 			<argument>%webfactory_piwik.disabled%</argument>
 			<argument>%webfactory_piwik.site_id%</argument>
 			<argument>%webfactory_piwik.piwik_host%</argument>
-			<argument>%webfactory_piwik.use_cacheable_tracking_script%</argument>
+			<argument>%webfactory_piwik.tracker_path%</argument>
 			<tag name="twig.extension"/>
 		</service>
 
