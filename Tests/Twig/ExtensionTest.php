@@ -36,7 +36,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     public function testIsTwigExtension()
     {
         $extension = new Extension(false, 1, '', false);
-        $this->assertInstanceOf('\Twig_Extension', $extension);
+        $this->assertInstanceOf('\Twig_ExtensionInterface', $extension);
     }
 
 }
