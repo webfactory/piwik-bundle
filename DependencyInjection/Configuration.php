@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('disabled')->defaultValue('%kernel.debug%')->end()
-            ->scalarNode('piwik_host')->defaultValue('piwik.webfactory.de')->end()
+            ->scalarNode('piwik_host')->isRequired()->end()
             ->booleanNode('use_cacheable_tracking_script')->defaultTrue()->end()
             ->scalarNode('site_id')->isRequired()->end()
             ->end();
