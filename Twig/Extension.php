@@ -26,7 +26,7 @@ class Extension extends \Twig_Extension
 
     public function piwikCode()
     {
-        if ($this->disabled) {
+        if (!$this->disabled) {
             return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
         }
 
@@ -34,7 +34,20 @@ class Extension extends \Twig_Extension
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
 var _paq = _paq || [];
-_paq.push(["trackPageView"]);
+
+var trackingAlreadyQueued = false;
+for(var i = 0; i < _paq.length; i++) {
+    var functionName = _paq[i][0];
+    if(functionName == "trackPageView" || functionName == "trackSiteSearch"){
+        trackingAlreadyQueued = true;
+        break;
+    }
+}
+
+if(!trackingAlreadyQueued) {
+    _paq.push(["trackPageView"]);
+}
+
 _paq.push(["enableLinkTracking"]);
 
 (function() {
