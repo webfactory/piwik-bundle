@@ -18,7 +18,7 @@ Simply add the following to your composer.json (see http://getcomposer.org/):
 ```json
 "require": {
     // ...
-    "webfactory/piwik-bundle": "~1.0"
+    "webfactory/piwik-bundle": "~2.0"
 }
 ```
 
