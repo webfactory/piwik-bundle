@@ -15,28 +15,32 @@ Installation
 ------------
 Simply add the following to your composer.json (see http://getcomposer.org/):
 
-    "require" :  {
-        // ...
-        "webfactory/piwik-bundle": "~1.0"
-    }
+```json
+"require": {
+    // ...
+    "webfactory/piwik-bundle": "~1.0"
+}
+```
 
 And enable the bundle in `app/AppKernel.php`:
 
-    <?php
-    // app/AppKernel.php
-    
-    public function registerBundles()
-    {
-        $bundles = array(
-            // ...
-            new Webfactory\Bundle\PiwikBundle\WebfactoryPiwikBundle(),
-        );
-    }
+```php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Webfactory\Bundle\PiwikBundle\WebfactoryPiwikBundle(),
+    );
+}
+```
 
 
 Usage
 -----
-Somewhere in your views, right before the closing &lt;/body&gt; tag, insert 
+Somewhere in your views, right before the closing `</body>` tag, insert 
 
 	{{ piwik_code() }}
 
@@ -45,12 +49,17 @@ Configuration
 -------------
 You can configure the bundle in your `config.yml`. Full Example:
 
-	webfactory_piwik:
-	    site_id: 1                           # Required, no default. Must be set to the site id found in the Piwik control panel
-	    disabled: %kernel.debug%             # Required, has default. Usually, you only want to include the tracking code in a production environment
-	    piwik_host: my.piwik.hostname        # Required. no default. Hostname and path to the piwik host.
-	    tracker_path: "/js/"                 # Required, has default. Path to the tracking script on the host.
-
+```yaml
+webfactory_piwik:
+    # Required, no default. Must be set to the site id found in the Piwik control panel
+    site_id: 1
+    # Required, has default. Usually, you only want to include the tracking code in a production environment
+    disabled: %kernel.debug%
+    # Required. no default. Hostname and path to the piwik host.
+    piwik_host: my.piwik.hostname
+    # Required, has default. Path to the tracking script on the host.
+    tracker_path: "/js/"
+```
 
 
 Credits, Copyright and License
