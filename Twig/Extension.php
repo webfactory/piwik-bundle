@@ -13,8 +13,8 @@ class Extension extends \Twig_Extension
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
-        $this->piwikHost = $piwikHost;
-        $this->trackerPath = $trackerPath;
+        $this->piwikHost = rtrim($piwikHost, '/');
+        $this->trackerPath = ltrim($trackerPath, '/');
     }
 
     public function getFunctions()
