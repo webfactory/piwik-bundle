@@ -33,6 +33,29 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($hostname, $extension->piwikCode());
     }
 
+    public function testAdditionalApiCallsCanBeAdded()
+    {
+        $extension = new Extension(false, null, null, false);
+        $extension->piwikPush("foo", "bar", "baz");
+        $this->assertContains('["foo","bar","baz"]', $extension->piwikCode());
+    }
+
+    public function testTrackPageViewEnabledByDefault()
+    {
+        $extension = new Extension(false, null, null, false);
+        $this->assertContains('"trackPageView"', $extension->piwikCode());
+    }
+
+    public function testTrackSiteSearchDisablesPageTracking()
+    {
+        $extension = new Extension(false, null, null, false);
+        $extension->piwikPush('trackSiteSearch', "Banana", "Organic Food", 42);
+
+        $code = $extension->piwikCode();
+        $this->assertContains('"trackSiteSearch"', $code);
+        $this->assertNotContains('"trackPageView"', $code);
+    }
+
     public function testIsTwigExtension()
     {
         $extension = new Extension(false, 1, '', false);

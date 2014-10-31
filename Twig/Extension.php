@@ -9,6 +9,11 @@ class Extension extends \Twig_Extension
     protected $piwikHost;
     protected $trackerPath;
 
+    protected $paqs = array(
+        array('trackPageView'),
+        array('enableLinkTracking')
+    );
+
     function __construct($disabled, $siteId, $piwikHost, $trackerPath)
     {
         $this->disabled = $disabled;
@@ -20,8 +25,31 @@ class Extension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('piwik_code', array($this, 'piwikCode'), array('is_safe' => array('html')))
+            new \Twig_SimpleFunction('piwik_code', array($this, 'piwikCode'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('piwik', array($this, 'piwikPush'))
         );
+    }
+
+    public function piwikPush()
+    {
+        $args = func_get_args();
+
+        $this->paqs[] = $args;
+        $func = $args[0];
+
+        /*
+         * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
+         * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
+         * or http://piwik.org/docs/site-search/#track-site-search-using-the-javascript-tracksitesearch-function.
+         */
+        if ($func == 'trackSiteSearch') {
+            foreach ($this->paqs as $offset => $p) {
+                if ($p[0] == 'trackPageView') {
+                    unset($this->paqs[$offset]);
+                    break;
+                }
+            }
+        }
     }
 
     public function piwikCode()
@@ -30,25 +58,12 @@ class Extension extends \Twig_Extension
             return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
         }
 
+        $paq = json_encode($this->paqs);
+
         $piwikCode = <<<EOT
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
-var _paq = _paq || [];
-
-var trackingAlreadyQueued = false;
-for(var i = 0; i < _paq.length; i++) {
-    var functionName = _paq[i][0];
-    if(functionName == "trackPageView" || functionName == "trackSiteSearch"){
-        trackingAlreadyQueued = true;
-        break;
-    }
-}
-
-if(!trackingAlreadyQueued) {
-    _paq.push(["trackPageView"]);
-}
-
-_paq.push(["enableLinkTracking"]);
+var _paq = _paq.concat({$paq}) || {$paq};
 
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
