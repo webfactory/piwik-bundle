@@ -63,7 +63,7 @@ class Extension extends \Twig_Extension
         $piwikCode = <<<EOT
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
-var _paq = _paq.concat({$paq}) || {$paq};
+var _paq = (_paq||[]).concat({$paq});
 
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
