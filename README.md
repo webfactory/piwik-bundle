@@ -37,13 +37,13 @@ public function registerBundles()
 }
 ```
 
-
 Usage
 -----
 Somewhere in your views, right before the closing `</body>` tag, insert 
 
 	{{ piwik_code() }}
 
+This will add the appropriate Piwik tracking code as [described in the API reference](http://developer.piwik.org/api-reference/tracking-javascript#where-can-i-find-the-piwik-tracking-code).
 
 Configuration
 -------------
@@ -61,6 +61,28 @@ webfactory_piwik:
     tracker_path: "/js/"
 ```
 
+Add calls to the JavaScript tracker API
+---------------------------------------
+
+The [JavaScript tracking API](http://developer.piwik.org/api-reference/tracking-javascript) provides a lot of methods
+for setting the page name, tracking search results, using custom variables and much more.
+
+The generic `piwik()` function allows you to control the `_paq` variable and add additional API calls to it. For example,
+in your Twig template, you can write
+
+```twig
+    <!-- Somewhere in your HTML, not necessarily at the end -->
+    {{ piwik("setDocumentTitle", document.title) }}
+    {{ piwik("trackGoal", 1) }}
+
+    <!-- Then, at the end: -->
+    {{ piwik_code() }}
+    </body>
+```
+
+Note that when you call `trackSiteSearch`, this will automatically disable the `trackPageView` call made by default.
+This is the [recommended](http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords)
+behaviour.
 
 Credits, Copyright and License
 ------------------------------
