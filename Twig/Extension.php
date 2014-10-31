@@ -9,10 +9,7 @@ class Extension extends \Twig_Extension
     protected $piwikHost;
     protected $trackerPath;
 
-    protected $paqs = array(
-        array('trackPageView'),
-        array('enableLinkTracking')
-    );
+    protected $paqs = array();
 
     function __construct($disabled, $siteId, $piwikHost, $trackerPath)
     {
@@ -32,24 +29,7 @@ class Extension extends \Twig_Extension
 
     public function piwikPush()
     {
-        $args = func_get_args();
-
-        $this->paqs[] = $args;
-        $func = $args[0];
-
-        /*
-         * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
-         * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
-         * or http://piwik.org/docs/site-search/#track-site-search-using-the-javascript-tracksitesearch-function.
-         */
-        if ($func == 'trackSiteSearch') {
-            foreach ($this->paqs as $offset => $p) {
-                if ($p[0] == 'trackPageView') {
-                    unset($this->paqs[$offset]);
-                    break;
-                }
-            }
-        }
+        $this->paqs[] = func_get_args();
     }
 
     public function piwikCode()
@@ -57,6 +37,8 @@ class Extension extends \Twig_Extension
         if ($this->disabled) {
             return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
         }
+
+        $this->addDefaultApiCalls();
 
         $paq = json_encode($this->paqs);
 
@@ -77,6 +59,24 @@ var _paq = (_paq||[]).concat({$paq});
 EOT;
 
         return $piwikCode;
+    }
+
+    protected function addDefaultApiCalls()
+    {
+        $this->paqs[] = array('enableLinkTracking');
+
+        foreach ($this->paqs as $paq) {
+            if ($paq[0] == 'trackSiteSearch') {
+                /*
+                 * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
+                 * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
+                 * or http://piwik.org/docs/site-search/#track-site-search-using-the-javascript-tracksitesearch-function.
+                 */
+                return; // Do not add 'trackPageView'
+            }
+        }
+
+        $this->paqs[] = array('trackPageView');
     }
 
     /**
