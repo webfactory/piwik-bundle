@@ -1,6 +1,11 @@
 Upgrading notes
 ===============
 
+Version 2.2
+-----------
+
+* Make the Twig Extension available as a public service `webfactory_piwik.twig_extension` (#5)
+
 Version 2.1
 -----------
 
