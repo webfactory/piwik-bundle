@@ -49,8 +49,15 @@ var _paq = (_paq||[]).concat({$paq});
 
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
-    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
     _paq.push(["setSiteId", "{$this->siteId}"]);
+EOT;
+        if($this->trackerPath !== 'piwik.php') {
+            $piwikCode .= <<<EOT
+    _paq.push(['setAPIUrl', u]);
+EOT;
+        }
+        $piwikCode .= <<<EOT
     var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
     g.defer=true; g.async=true; g.src=u+"{$this->trackerPath}"; s.parentNode.insertBefore(g,s);
 })();
