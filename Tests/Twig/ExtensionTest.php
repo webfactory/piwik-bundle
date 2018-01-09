@@ -26,6 +26,22 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains((string)$siteId, $extension->piwikCode());
     }
 
+    public function testPiwikCodeContainsApiURL() {
+        $siteId = 1;
+        $hostname = 'myHost.de';
+        $path = '/js/';
+        $extension = new Extension(false, $siteId, $hostname, $path);
+        $this->assertContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
+    }
+
+    public function testPiwikCodeDoesNotContainApiURL() {
+        $siteId = 1;
+        $hostname = 'myHost.de';
+        $path = 'piwik.php';
+        $extension = new Extension(false, $siteId, $hostname, $path);
+        $this->assertNotContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
+    }
+
     public function testPiwikCodeContainsHostName()
     {
         $hostname = 'myHost.de';
