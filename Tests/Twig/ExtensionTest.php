@@ -3,8 +3,9 @@
 namespace Twig;
 
 use Webfactory\Bundle\PiwikBundle\Twig\Extension;
+use PHPUnit\Framework\TestCase;
 
-class ExtensionTest extends \PHPUnit_Framework_TestCase
+class ExtensionTest extends TestCase
 {
 
     public function testPiwikCodeReturnsNoScriptWhenDisabled()
