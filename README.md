@@ -88,5 +88,5 @@ Credits, Copyright and License
 ------------------------------
 Copyright 2012-2018 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
 
-- <http://www.webfactory.de>
-- <http://twitter.com/webfactory>
+- <https://www.webfactory.de>
+- <https://twitter.com/webfactory>
