@@ -1,13 +1,13 @@
 {
     "name": "webfactory/piwik-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony2 Bundle that adds a twig-function for the Piwik tracking code.",
+    "description": "Symfony Bundle that adds a twig-function for the Matomo tracking code.",
     "license": "MIT",
     "authors": [
         {
             "name": "webfactory GmbH",
             "email": "info@webfactory.de",
-            "homepage": "http://www.webfactory.de",
+            "homepage": "https://www.webfactory.de",
             "role": "Developer"
         },
         {
