@@ -16,7 +16,9 @@
 	},
 	"require":{
 		"twig/twig": "~1.0",
-		"symfony/symfony": "~2.0|~3.0"
+		"symfony/config": "~2.0|~3.0",
+		"symfony/http-kernel": "~2.0|~3.0",
+		"symfony/dependency-injection": "~2.0|~3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
