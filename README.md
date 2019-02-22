@@ -13,14 +13,8 @@ It contains a Twig function that can insert the tracking code into your website.
 
 Installation
 ------------
-Simply add the following to your composer.json (see http://getcomposer.org/):
 
-```json
-"require": {
-    // ...
-    "webfactory/piwik-bundle": "~2.0"
-}
-```
+    composer require webfactory/piwik-bundle
 
 And enable the bundle in `app/AppKernel.php`:
 
