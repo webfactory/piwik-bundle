@@ -46,7 +46,9 @@ class Extension extends \Twig_Extension
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
 var _paq = (_paq||[]).concat({$paq});
-
+_paq.push(["setDoNotTrack", true]);
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
     _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
