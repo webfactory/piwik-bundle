@@ -46,7 +46,8 @@ class Extension extends \Twig_Extension
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
 var _paq = (_paq||[]).concat({$paq});
-
+_paq.push(["setDoNotTrack", true]);
+_paq.push(['trackPageView']);
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
     _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
@@ -62,6 +63,7 @@ EOT;
     g.defer=true; g.async=true; g.src=u+"{$this->trackerPath}"; s.parentNode.insertBefore(g,s);
 })();
 //]]></script>
+<noscript><p><img src="//{$this->piwikHost}/piwik.php?idsite={$this->siteId}&rec=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 EOT;
 
