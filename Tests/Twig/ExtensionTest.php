@@ -2,12 +2,11 @@
 
 namespace Twig;
 
-use Webfactory\Bundle\PiwikBundle\Twig\Extension;
 use PHPUnit\Framework\TestCase;
+use Webfactory\Bundle\PiwikBundle\Twig\Extension;
 
 class ExtensionTest extends TestCase
 {
-
     public function testPiwikCodeReturnsNoScriptWhenDisabled()
     {
         $extension = new Extension(true, 1, '', false);
@@ -24,10 +23,11 @@ class ExtensionTest extends TestCase
     {
         $siteId = 1234;
         $extension = new Extension(false, $siteId, '', false);
-        $this->assertContains((string)$siteId, $extension->piwikCode());
+        $this->assertContains((string) $siteId, $extension->piwikCode());
     }
 
-    public function testPiwikCodeContainsApiURL() {
+    public function testPiwikCodeContainsApiURL()
+    {
         $siteId = 1;
         $hostname = 'myHost.de';
         $path = '/js/';
@@ -35,7 +35,8 @@ class ExtensionTest extends TestCase
         $this->assertContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
     }
 
-    public function testPiwikCodeDoesNotContainApiURL() {
+    public function testPiwikCodeDoesNotContainApiURL()
+    {
         $siteId = 1;
         $hostname = 'myHost.de';
         $path = 'piwik.php';
@@ -53,7 +54,7 @@ class ExtensionTest extends TestCase
     public function testAdditionalApiCallsCanBeAdded()
     {
         $extension = new Extension(false, null, null, false);
-        $extension->piwikPush("foo", "bar", "baz");
+        $extension->piwikPush('foo', 'bar', 'baz');
         $this->assertContains('["foo","bar","baz"]', $extension->piwikCode());
     }
 
@@ -66,7 +67,7 @@ class ExtensionTest extends TestCase
     public function testTrackSiteSearchDisablesPageTracking()
     {
         $extension = new Extension(false, null, null, false);
-        $extension->piwikPush('trackSiteSearch', "Banana", "Organic Food", 42);
+        $extension->piwikPush('trackSiteSearch', 'Banana', 'Organic Food', 42);
 
         $code = $extension->piwikCode();
         $this->assertContains('"trackSiteSearch"', $code);
@@ -78,5 +79,4 @@ class ExtensionTest extends TestCase
         $extension = new Extension(false, 1, '', false);
         $this->assertInstanceOf('\Twig_ExtensionInterface', $extension);
     }
-
 }

@@ -9,9 +9,9 @@ class Extension extends \Twig_Extension
     protected $piwikHost;
     protected $trackerPath;
 
-    protected $paqs = array();
+    protected $paqs = [];
 
-    function __construct($disabled, $siteId, $piwikHost, $trackerPath)
+    public function __construct($disabled, $siteId, $piwikHost, $trackerPath)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
@@ -21,15 +21,15 @@ class Extension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('piwik_code', array($this, 'piwikCode'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('piwik', array($this, 'piwikPush'))
-        );
+        return [
+            new \Twig_SimpleFunction('piwik_code', [$this, 'piwikCode'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('piwik', [$this, 'piwikPush']),
+        ];
     }
 
     public function piwikPush()
     {
-        $this->paqs[] = func_get_args();
+        $this->paqs[] = \func_get_args();
     }
 
     public function piwikCode()
@@ -53,7 +53,7 @@ _paq.push(['trackPageView']);
     _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
     _paq.push(["setSiteId", "{$this->siteId}"]);
 EOT;
-        if($this->trackerPath !== 'piwik.php') {
+        if ('piwik.php' !== $this->trackerPath) {
             $piwikCode .= <<<EOT
     _paq.push(['setAPIUrl', u]);
 EOT;
@@ -72,10 +72,10 @@ EOT;
 
     protected function addDefaultApiCalls()
     {
-        $this->paqs[] = array('enableLinkTracking');
+        $this->paqs[] = ['enableLinkTracking'];
 
         foreach ($this->paqs as $paq) {
-            if ($paq[0] == 'trackSiteSearch') {
+            if ('trackSiteSearch' == $paq[0]) {
                 /*
                  * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
                  * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
@@ -85,11 +85,11 @@ EOT;
             }
         }
 
-        $this->paqs[] = array('trackPageView');
+        $this->paqs[] = ['trackPageView'];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {
