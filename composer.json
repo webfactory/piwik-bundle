@@ -1,33 +1,36 @@
 {
-	"name": "webfactory/piwik-bundle",
-	"type": "symfony-bundle",
-	"description": "Symfony2 Bundle that adds a twig-function for the Piwik tracking code.",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "webfactory GmbH",
-			"email": "info@webfactory.de",
-			"homepage": "http://www.webfactory.de",
-			"role": "Developer"
-		}
-	],
-	"autoload": {
-		"psr-4": { "Webfactory\\Bundle\\PiwikBundle\\": "" }
-	},
-	"require":{
-		"twig/twig": "~1.0",
-		"symfony/config": "~2.0|~3.0",
-		"symfony/http-kernel": "~2.0|~3.0",
-		"symfony/dependency-injection": "~2.0|~3.0"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "~4.0",
-		"satooshi/php-coveralls": "~0.6",
-		"squizlabs/php_codesniffer": "~1.0",
-		"phpmd/phpmd": "~1.0",
-		"sebastian/phpcpd": "~2.0",
-		"mayflower/php-codebrowser": "~1.1",
-		"phploc/phploc": "~2.0",
-		"pdepend/pdepend": "~1.1"
-	}
+    "name": "webfactory/piwik-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Bundle that adds a twig-function for the Piwik tracking code.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "webfactory GmbH",
+            "email": "info@webfactory.de",
+            "homepage": "http://www.webfactory.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "symfony/config": "^2.8|^3.0",
+        "symfony/dependency-injection": "^2.8|^3.0",
+        "symfony/http-kernel": "^2.8|^3.0",
+        "twig/twig": "^1.34|^2.0"
+    },
+    "require-dev": {
+        "mayflower/php-codebrowser": "~1.1",
+        "pdepend/pdepend": "~1.1",
+        "phploc/phploc": "~2.0",
+        "phpmd/phpmd": "~1.0",
+        "phpunit/phpunit": "^4.8.36|^5.7",
+        "satooshi/php-coveralls": "~0.6",
+        "sebastian/phpcpd": "~2.0",
+        "squizlabs/php_codesniffer": "~1.0",
+        "symfony/phpunit-bridge": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webfactory\\Bundle\\PiwikBundle\\": ""
+        }
+    }
 }

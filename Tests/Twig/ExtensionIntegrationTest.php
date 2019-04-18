@@ -2,7 +2,8 @@
 
 namespace Twig;
 
-use Symfony\Component\DependencyInjection\Tests\Compiler\CheckExceptionOnInvalidReferenceBehaviorPassTest;
+use Twig\Extension\ExtensionInterface;
+use Twig\Loader\ArrayLoader;
 use Webfactory\Bundle\PiwikBundle\Twig\Extension;
 
 /**
@@ -15,35 +16,36 @@ final class ExtensionIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testExpressionGetsTransformedByTwigEnvironment()
     {
-        $twig = new \Twig_Environment(
-            new \Twig_Loader_String(),
-            array('debug' => true, 'cache' => false, 'autoescape' => true, 'optimizations' => 0)
-        );
         $siteId = 1;
         $hostname = 'myHost.de';
-        $twig->addExtension(new Extension(false, $siteId, $hostname, false));
 
-        $output = $twig->render('{{ piwik_code() }}');
+        $output = $this->renderWithExtension('{{ piwik_code() }}', new Extension(false, $siteId, $hostname, false));
 
-        $this->assertContains((string)$siteId, $output);
+        $this->assertContains((string) $siteId, $output);
         $this->assertContains($hostname, $output);
     }
 
     public function testCustomApiCallsThroughPiwikFunction()
     {
-        $twig = new \Twig_Environment(
-            new \Twig_Loader_String(),
-            array('debug' => true, 'cache' => false, 'autoescape' => true, 'optimizations' => 0)
-        );
-
-        $twig->addExtension(new Extension(false, null, null, false));
-
-        $output = $twig->render("
+        $output = $this->renderWithExtension("
             {{ piwik('foo', 'bar', 'baz') }}
             {{ piwik_code() }}
-        ");
+        ", new Extension(false, null, null, false));
 
         $this->assertContains('["foo","bar","baz"]', $output);
     }
 
+    private function renderWithExtension($templateString, ExtensionInterface $extension)
+    {
+        $twig = new Environment(
+            new ArrayLoader(),
+            ['debug' => true]
+        );
+
+        $twig->addExtension($extension);
+
+        $template = $twig->createTemplate($templateString);
+
+        return $template->render([]);
+    }
 }

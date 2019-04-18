@@ -2,7 +2,10 @@
 
 namespace Webfactory\Bundle\PiwikBundle\Twig;
 
-class Extension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class Extension extends AbstractExtension
 {
     protected $disabled;
     protected $siteId;
@@ -22,8 +25,8 @@ class Extension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('piwik_code', array($this, 'piwikCode'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('piwik', array($this, 'piwikPush'))
+            new TwigFunction('piwik_code', array($this, 'piwikCode'), array('is_safe' => array('html'))),
+            new TwigFunction('piwik', array($this, 'piwikPush'))
         );
     }
 
