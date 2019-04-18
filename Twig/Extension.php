@@ -2,7 +2,10 @@
 
 namespace Webfactory\Bundle\PiwikBundle\Twig;
 
-class Extension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class Extension extends AbstractExtension
 {
     protected $disabled;
     protected $siteId;

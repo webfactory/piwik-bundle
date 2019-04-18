@@ -3,6 +3,8 @@
 namespace Twig;
 
 use PHPUnit\Framework\TestCase;
+use Twig\Extension\ExtensionInterface;
+use Twig\Loader\ArrayLoader;
 use Webfactory\Bundle\PiwikBundle\Twig\Extension;
 
 /**
@@ -15,12 +17,10 @@ final class ExtensionIntegrationTest extends TestCase
      */
     public function testExpressionGetsTransformedByTwigEnvironment()
     {
-        $twig = $this->getTestTwigEnvironement();
         $siteId = 1;
         $hostname = 'myHost.de';
-        $twig->addExtension(new Extension(false, $siteId, $hostname, false));
 
-        $output = $twig->createTemplate('{{ piwik_code() }}')->render([]);
+        $output = $this->renderWithExtension('{{ piwik_code() }}', new Extension(false, $siteId, $hostname, false));
 
         $this->assertContains((string) $siteId, $output);
         $this->assertContains($hostname, $output);
@@ -28,31 +28,25 @@ final class ExtensionIntegrationTest extends TestCase
 
     public function testCustomApiCallsThroughPiwikFunction()
     {
-        $twig = $this->getTestTwigEnvironement();
-
-        $twig->addExtension(new Extension(false, null, null, false));
-
-        $output = $twig->createTemplate("
+        $output = $this->renderWithExtension("
             {{ piwik('foo', 'bar', 'baz') }}
             {{ piwik_code() }}
-        ")->render([]);
+        ", new Extension(false, null, null, false));
 
         $this->assertContains('["foo","bar","baz"]', $output);
     }
 
-    /**
-     * instead of the obsolete
-     * new \Twig_Environment(
-     *      array('debug' => true, 'cache' => false, 'autoescape' => true, 'optimizations' => 0)
-     * );.
-     *
-     * @return \Twig_Environment
-     */
-    protected function getTestTwigEnvironement()
+    private function renderWithExtension($templateString, ExtensionInterface $extension)
     {
-        $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
-        $twig->setCache(false);
+        $twig = new Environment(
+            new ArrayLoader(),
+            ['debug' => true]
+        );
 
-        return $twig;
+        $twig->addExtension($extension);
+
+        $template = $twig->createTemplate($templateString);
+
+        return $template->render([]);
     }
 }
