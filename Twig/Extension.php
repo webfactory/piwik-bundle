@@ -50,7 +50,6 @@ class Extension extends AbstractExtension
 <script type="text/javascript">//<![CDATA[
 var _paq = (_paq||[]).concat({$paq});
 _paq.push(["setDoNotTrack", true]);
-_paq.push(['trackPageView']);
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
     _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
