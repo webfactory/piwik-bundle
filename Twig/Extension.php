@@ -65,7 +65,7 @@ EOT;
     g.defer=true; g.async=true; g.src=u+"{$this->trackerPath}"; s.parentNode.insertBefore(g,s);
 })();
 //]]></script>
-<noscript><p><img src="//{$this->piwikHost}/piwik.php?idsite={$this->siteId}&rec=1" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//{$this->piwikHost}/piwik.php?idsite={$this->siteId}&amp;rec=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 EOT;
 
