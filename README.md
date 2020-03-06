@@ -1,9 +1,8 @@
 ![webfactory Logo](http://www.webfactory.de/bundles/webfactorytwiglayout/img/logo.png) WebfactoryPiwikBundle
 ============
 
-[![Build Status](https://travis-ci.org/webfactory/piwik-bundle.svg?branch=master)](https://travis-ci.org/webfactory/piwik-bundle)
+[![Run Tests](https://github.com/webfactory/piwik-bundle/workflows/Run%20Tests/badge.svg)](https://github.com/webfactory/piwik-bundle/workflows/)
 [![Coverage Status](https://coveralls.io/repos/webfactory/piwik-bundle/badge.png?branch=master)](https://coveralls.io/r/webfactory/piwik-bundle?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webfactory/piwik-bundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b/mini.png)](https://insight.sensiolabs.com/projects/b6cd0ffd-e116-43c0-ba58-fbb70371bd6b)
 
 A Symfony Bundle that helps you to use the Matomo (formerly known as Piwik) Open Analytics Platform with your project.
@@ -80,7 +79,12 @@ behaviour.
 
 Credits, Copyright and License
 ------------------------------
-Copyright 2012-2018 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
+
+This code was written by webfactory GmbH, Bonn, Germany. We're a software development
+agency with a focus on PHP (mostly [Symfony](http://github.com/symfony/symfony)). If you're a
+developer looking for new challenges, we'd like to hear from you!
 
 - <https://www.webfactory.de>
 - <https://twitter.com/webfactory>
+
+Copyright 2012 – 2020 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
