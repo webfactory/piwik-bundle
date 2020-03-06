@@ -2,15 +2,15 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-	<services>
+    <services>
 
-		<service id="webfactory_piwik.twig_extension" class="Webfactory\Bundle\PiwikBundle\Twig\Extension" public="true">
-			<argument>%webfactory_piwik.disabled%</argument>
-			<argument>%webfactory_piwik.site_id%</argument>
-			<argument>%webfactory_piwik.piwik_host%</argument>
-			<argument>%webfactory_piwik.tracker_path%</argument>
-			<tag name="twig.extension"/>
-		</service>
+        <service id="Webfactory\Bundle\PiwikBundle\Twig\Extension">
+            <argument>%webfactory_piwik.disabled%</argument>
+            <argument>%webfactory_piwik.site_id%</argument>
+            <argument>%webfactory_piwik.piwik_host%</argument>
+            <argument>%webfactory_piwik.tracker_path%</argument>
+            <tag name="twig.extension" />
+        </service>
 
-	</services>
+    </services>
 </container>
