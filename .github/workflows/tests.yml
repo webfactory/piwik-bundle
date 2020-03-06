@@ -14,7 +14,7 @@ jobs:
             matrix:
                 php: [7.2, 7.3, 7.4]
         steps:
-            -   uses: actions/checkout@v1
+            -   uses: actions/checkout@v2
             -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
             -   run: mkdir -p build/logs
             -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
