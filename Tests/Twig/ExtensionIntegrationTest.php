@@ -31,7 +31,7 @@ final class ExtensionIntegrationTest extends TestCase
         $output = $this->renderWithExtension("
             {{ piwik('foo', 'bar', 'baz') }}
             {{ piwik_code() }}
-        ", new Extension(false, null, null, false));
+        ", new Extension(false, 1, 'my.host', false));
 
         $this->assertContains('["foo","bar","baz"]', $output);
     }
