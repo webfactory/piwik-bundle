@@ -28,10 +28,7 @@ class ExtensionTest extends TestCase
 
     public function testPiwikCodeContainsApiURL()
     {
-        $siteId = 1;
-        $hostname = 'myHost.de';
-        $path = '/js/';
-        $extension = new Extension(false, $siteId, $hostname, $path);
+        $extension = new Extension(false, 1, 'my.host', '/js/');
         $this->assertContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
     }
 
@@ -53,20 +50,20 @@ class ExtensionTest extends TestCase
 
     public function testAdditionalApiCallsCanBeAdded()
     {
-        $extension = new Extension(false, null, null, false);
+        $extension = new Extension(false, 1, 'my.host', false);
         $extension->piwikPush('foo', 'bar', 'baz');
         $this->assertContains('["foo","bar","baz"]', $extension->piwikCode());
     }
 
     public function testTrackPageViewEnabledByDefault()
     {
-        $extension = new Extension(false, null, null, false);
+        $extension = new Extension(false, 1, 'my.host', false);
         $this->assertContains('"trackPageView"', $extension->piwikCode());
     }
 
     public function testTrackSiteSearchDisablesPageTracking()
     {
-        $extension = new Extension(false, null, null, false);
+        $extension = new Extension(false, 1, 'my.host', false);
         $extension->piwikPush('trackSiteSearch', 'Banana', 'Organic Food', 42);
 
         $code = $extension->piwikCode();
