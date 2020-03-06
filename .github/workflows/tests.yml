@@ -17,7 +17,7 @@ jobs:
             -   uses: actions/checkout@v1
             -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
             -   run: mkdir -p build/logs
-            -   run: tools/phpunit --coverage-clover=build/logs/clover.xml
+            -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
             # Commented out Coveralls reporting until https://github.com/php-coveralls/php-coveralls/pull/275 is resolved
             #-   run: tools/php-coveralls --verbose
             #    env:
