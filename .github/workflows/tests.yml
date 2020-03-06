@@ -1,0 +1,25 @@
+name: Run Tests
+
+on:
+    push:
+        branches: 
+            - master
+    pull_request:
+
+jobs:
+    PHPUnit:
+        runs-on: ubuntu-18.04
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [7.2, 7.3, 7.4]
+        steps:
+            -   uses: actions/checkout@v1
+            -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
+            -   run: mkdir -p build/logs
+            -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+            # Commented out Coveralls reporting until https://github.com/php-coveralls/php-coveralls/pull/275 is resolved
+            #-   run: tools/php-coveralls --verbose
+            #    env:
+            #        COVERALLS_RUN_LOCALLY: 1
+            #        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
