@@ -7,14 +7,32 @@ use Twig\TwigFunction;
 
 class Extension extends AbstractExtension
 {
-    protected $disabled;
-    protected $siteId;
-    protected $piwikHost;
-    protected $trackerPath;
+    /**
+     * @var bool
+     */
+    private $disabled;
 
-    protected $paqs = [];
+    /**
+     * @var int
+     */
+    private $siteId;
 
-    public function __construct($disabled, $siteId, $piwikHost, $trackerPath)
+    /**
+     * @var string
+     */
+    private $piwikHost;
+
+    /**
+     * @var string
+     */
+    private $trackerPath;
+
+    /**
+     * @var array
+     */
+    private $paqs = [];
+
+    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
@@ -25,14 +43,14 @@ class Extension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('piwik_code', [$this, 'piwikCode'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('piwik', [$this, 'piwikPush']),
+            new TwigFunction('piwik_code', [$this, 'piwikCode'], ['is_safe' => ['html']]),
+            new TwigFunction('piwik', [$this, 'piwikPush']),
         ];
     }
 
-    public function piwikPush()
+    public function piwikPush(...$paqs)
     {
-        $this->paqs[] = \func_get_args();
+        $this->paqs[] = $paqs;
     }
 
     public function piwikCode()
@@ -72,12 +90,12 @@ EOT;
         return $piwikCode;
     }
 
-    protected function addDefaultApiCalls()
+    private function addDefaultApiCalls()
     {
         $this->paqs[] = ['enableLinkTracking'];
 
         foreach ($this->paqs as $paq) {
-            if ('trackSiteSearch' == $paq[0]) {
+            if ('trackSiteSearch' === $paq[0]) {
                 /*
                  * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
                  * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
@@ -88,13 +106,5 @@ EOT;
         }
 
         $this->paqs[] = ['trackPageView'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'webfactory_piwik';
     }
 }
