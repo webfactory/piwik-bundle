@@ -26,7 +26,7 @@
         "symfony/config": "~3.0|~4.0",
         "symfony/dependency-injection": "~3.0|~4.0",
         "symfony/http-kernel": "~3.0|~4.0",
-        "twig/twig": "^1.34|^2.0"
+        "twig/twig": "^1.34|^2.0|^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
