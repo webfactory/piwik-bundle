@@ -1,5 +1,5 @@
 {
-    "name": "webfactory/piwik-bundle",
+    "name": "bretrzaun/matomo-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Bundle that adds a twig-function for the Matomo tracking code.",
     "license": "MIT",
