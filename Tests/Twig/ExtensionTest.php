@@ -74,6 +74,6 @@ class ExtensionTest extends TestCase
     public function testIsTwigExtension()
     {
         $extension = new Extension(false, 1, '', false);
-        $this->assertInstanceOf('\Twig_ExtensionInterface', $extension);
+        $this->assertInstanceOf(\Twig\Extension\ExtensionInterface::class, $extension);
     }
 }
