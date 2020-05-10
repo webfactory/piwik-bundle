@@ -1,38 +1,38 @@
 {
-    "name": "bretrzaun/matomo-bundle",
-    "type": "symfony-bundle",
-    "description": "Symfony Bundle that adds a twig-function for the Matomo tracking code.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "webfactory GmbH",
-            "email": "info@webfactory.de",
-            "homepage": "https://www.webfactory.de",
-            "role": "Developer"
-        },
-        {
-            "name": "Tim Bernhard",
-            "email": "tim@genieblog.ch"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Webfactory\\Bundle\\PiwikBundle\\": ""
-        }
+  "name": "bretrzaun/matomo-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony Bundle that adds a twig-function for the Matomo tracking code.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "webfactory GmbH",
+      "email": "info@webfactory.de",
+      "homepage": "https://www.webfactory.de",
+      "role": "Developer"
     },
-    "require": {
-        "php": ">=7.3",
-        "ext-json": "*",
-        "symfony/config": "~3.0|~4.0|~5.0",
-        "symfony/dependency-injection": "~3.0|~4.0|~5.0",
-        "symfony/http-kernel": "~3.0|~4.0|~5.0",
-        "twig/twig": "^1.34|^2.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~7.0",
-        "symfony/phpunit-bridge": "@dev"
-    },
-    "config": {
-        "sort-packages": true
+    {
+      "name": "Tim Bernhard",
+      "email": "tim@genieblog.ch"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Webfactory\\Bundle\\PiwikBundle\\": ""
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*",
+    "symfony/config": "~3.0|~4.0|~5.0",
+    "symfony/dependency-injection": "~3.0|~4.0|~5.0",
+    "symfony/http-kernel": "~3.0|~4.0|~5.0",
+    "twig/twig": "^1.34|^2.0|^3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7.0",
+    "symfony/phpunit-bridge": "@dev"
+  },
+  "config": {
+    "sort-packages": true
+  }
 }
