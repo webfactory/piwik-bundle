@@ -20,7 +20,7 @@ final class ExtensionIntegrationTest extends TestCase
         $siteId = 1;
         $hostname = 'myHost.de';
 
-        $output = $this->renderWithExtension('{{ piwik_code() }}', new Extension(false, $siteId, $hostname, false));
+        $output = $this->renderWithExtension('{{ piwik_code() }}', new Extension(false, $siteId, $hostname, false, true));
 
         $this->assertContains((string) $siteId, $output);
         $this->assertContains($hostname, $output);
@@ -31,7 +31,7 @@ final class ExtensionIntegrationTest extends TestCase
         $output = $this->renderWithExtension("
             {{ piwik('foo', 'bar', 'baz') }}
             {{ piwik_code() }}
-        ", new Extension(false, 1, 'my.host', false));
+        ", new Extension(false, 1, 'my.host', false, true));
 
         $this->assertContains('["foo","bar","baz"]', $output);
     }
