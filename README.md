@@ -54,7 +54,9 @@ webfactory_piwik:
     tracker_path: "/js/"
     # Optional, has default. Disable cookies in favor of GDPR
     # https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/ & https://matomo.org/faq/general/faq_157/
-    disable_cookies: true
+    # 
+    # In the next major release the default will be true!
+    disable_cookies: false
 ```
 
 Add calls to the JavaScript tracker API
