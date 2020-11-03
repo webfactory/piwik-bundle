@@ -61,6 +61,12 @@ class ExtensionTest extends TestCase
         $this->assertContains('"trackPageView"', $extension->piwikCode());
     }
 
+    public function testCookiesCanBeDisabled()
+    {
+        $extension = new Extension(false, 1, 'my.host', false, true);
+        $this->assertContains('"disableCookies"', $extension->piwikCode());
+    }
+
     public function testTrackSiteSearchDisablesPageTracking()
     {
         $extension = new Extension(false, 1, 'my.host', false);

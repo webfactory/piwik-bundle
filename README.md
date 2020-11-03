@@ -46,12 +46,17 @@ You can configure the bundle in your `config.yml`. Full Example:
 webfactory_piwik:
     # Required, no default. Must be set to the site id found in the Matomo control panel
     site_id: 1
-    # Required, has default. Usually, you only want to include the tracking code in a production environment
-    disabled: '%kernel.debug%'
     # Required. no default. Hostname and path to the Matomo host.
     piwik_host: my.piwik.hostname
-    # Required, has default. Path to the tracking script on the host.
+    # Optional, has default. Usually, you only want to include the tracking code in a production environment
+    disabled: '%kernel.debug%'
+    # Optional, has default. Path to the tracking script on the host.
     tracker_path: "/js/"
+    # Optional, has default. Disable cookies in favor of GDPR
+    # https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/ & https://matomo.org/faq/general/faq_157/
+    # 
+    # In the next major release the default will be true!
+    disable_cookies: false
 ```
 
 Add calls to the JavaScript tracker API

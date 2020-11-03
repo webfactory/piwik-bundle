@@ -28,16 +28,22 @@ class Extension extends AbstractExtension
     private $trackerPath;
 
     /**
+     * @var bool
+     */
+    private $disableCookies;
+
+    /**
      * @var array
      */
     private $paqs = [];
 
-    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath)
+    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath, bool $disableCookies = false)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
         $this->piwikHost = rtrim($piwikHost, '/');
         $this->trackerPath = ltrim($trackerPath, '/');
+        $this->disableCookies = $disableCookies;
     }
 
     public function getFunctions()
@@ -57,6 +63,14 @@ class Extension extends AbstractExtension
     {
         if ($this->disabled) {
             return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
+        }
+
+        /*
+         * https://matomo.org/faq/general/faq_157/
+         * Call disableCookies before calling trackPageView
+         */
+        if (true === $this->disableCookies) {
+            $this->paqs[] = ['disableCookies'];
         }
 
         $this->addDefaultApiCalls();
