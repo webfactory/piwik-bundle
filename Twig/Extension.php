@@ -37,7 +37,7 @@ class Extension extends AbstractExtension
      */
     private $paqs = [];
 
-    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath, bool $disableCookies = false)
+    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath, bool $disableCookies = true)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;

@@ -18,15 +18,6 @@ class WebfactoryPiwikExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (null === $config['disable_cookies']) {
-            $config['disable_cookies'] = false;
-            @trigger_error(
-                'The "disableCookies" configuration key is missing. In the next major version, it will default to "true". 
-                Please configure the "disableCookies" key explicitly if this is not what you want.',
-                E_USER_DEPRECATED
-            );
-        }
-
         foreach (['disabled', 'piwik_host', 'tracker_path', 'site_id', 'disable_cookies'] as $configParameterKey) {
             $container->setParameter("webfactory_piwik.$configParameterKey", $config[$configParameterKey]);
         }
