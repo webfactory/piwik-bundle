@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('piwik_host')->isRequired()->end()
             ->scalarNode('tracker_path')->defaultValue('/js/')->end()
             ->scalarNode('site_id')->isRequired()->end()
-            ->scalarNode('disable_cookies')->defaultValue(true)->end()
+            ->scalarNode('disable_cookies')->defaultValue(null)->end()
             ->end();
 
         return $treeBuilder;
