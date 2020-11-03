@@ -18,7 +18,7 @@ class WebfactoryPiwikExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        if ($config['disable_cookies'] === null) {
+        if (null === $config['disable_cookies']) {
             $config['disable_cookies'] = false;
             @trigger_error(
                 'The "disableCookies" configuration key is missing. In the next major version, it will default to "true". 

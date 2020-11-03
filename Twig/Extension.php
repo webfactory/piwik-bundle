@@ -69,7 +69,7 @@ class Extension extends AbstractExtension
          * https://matomo.org/faq/general/faq_157/
          * Call disableCookies before calling trackPageView
          */
-        if ($this->disableCookies === true) {
+        if (true === $this->disableCookies) {
             $this->paqs[] = ['disableCookies'];
         }
 
