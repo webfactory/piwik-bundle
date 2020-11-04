@@ -21,8 +21,8 @@ class WebfactoryPiwikExtension extends Extension
         if (null === $config['disable_cookies']) {
             $config['disable_cookies'] = false;
             @trigger_error(
-                'The "disableCookies" configuration key is missing. In the next major version, it will default to "true". 
-                Please configure the "disableCookies" key explicitly if this is not what you want.',
+                'The "disable_cookies" configuration key is missing. In the next major version, it will default to "true". '.
+                'Please configure the "disable_cookies" key explicitly if this is not what you want.',
                 E_USER_DEPRECATED
             );
         }
