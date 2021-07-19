@@ -3,3 +3,4 @@ composer.phar
 vendor/
 .idea/
 build/
+.php_cs.cache
