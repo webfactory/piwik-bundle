@@ -1,6 +1,11 @@
 Upgrading notes
 ===============
 
+Version 3.0
+-----------
+
+* Set config key disable_cookies default to true [BC break] (#31)
+
 Version 2.2
 -----------
 
