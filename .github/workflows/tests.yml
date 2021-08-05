@@ -1,25 +1,55 @@
-name: Run Tests
+name: Tests
+
+permissions:
+    contents: read
+    packages: read
 
 on:
     push:
-        branches: 
+        branches:
             - master
     pull_request:
+    pull_request_target:
+
+env:
+    APP_ENV: test
+    PHP_VERSION: 7.2
 
 jobs:
     PHPUnit:
+        name: PHPUnit
         runs-on: ubuntu-18.04
-        strategy:
-            fail-fast: false
-            matrix:
-                php: [7.2, 7.3, 7.4]
+        # Run pull_request_target only for Dependabot
+        # (todo: create merge commit? https://github.com/actions/checkout/issues/518)
+        if: |
+            (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') ||
+            (github.actor != 'dependabot[bot]' && github.event_name != 'pull_request_target')
         steps:
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ env.PHP_VERSION }}
+                    tools: composer:v2
+                    ini-values: variables_order=EGPCS, date.timezone=Europe/Berlin
+                    extensions: intl
             -   uses: actions/checkout@v2
-            -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
-            -   run: mkdir -p build/logs
-            -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-            # Commented out Coveralls reporting until https://github.com/php-coveralls/php-coveralls/pull/275 is resolved
-            #-   run: tools/php-coveralls --verbose
-            #    env:
-            #        COVERALLS_RUN_LOCALLY: 1
-            #        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+                with:
+                    ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+            -   uses: webfactory/ssh-agent@master
+                with:
+                    ssh-private-key: ${{ secrets.ORG_SSH_PRIVATE_KEY }}
+            -   run: git clone --depth=1 git@github.com:webfactory/actions.git .github/actions
+            -   uses: ./.github/actions/setup-workspace
+            -   uses: actions/cache@v2
+                with:
+                    path: vendor
+                    key: composer-${{ runner.os }}-${{ env.PHP_VERSION }}-${{ hashFiles('composer.json', 'composer.lock') }}
+                    restore-keys: |
+                        composer-${{ runner.os }}-${{ env.PHP_VERSION }}-
+                        composer-${{ runner.os }}-
+            -   run: |
+                    composer install --no-interaction --no-progress --ansi --no-scripts
+                    composer show
+                env:
+                    COMPOSER_AUTH: ${{ secrets.ORG_COMPOSER_AUTH_JSON }}
+            -   uses: ./.github/actions/cleanup-secrets
+            -   run: vendor/phpunit/phpunit/phpunit
