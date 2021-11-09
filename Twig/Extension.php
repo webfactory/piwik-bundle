@@ -107,18 +107,31 @@ EOT;
     private function addDefaultApiCalls()
     {
         $this->paqs[] = ['enableLinkTracking'];
-
-        foreach ($this->paqs as $paq) {
-            if ('trackSiteSearch' === $paq[0] || 'trackPageView' === $paq[0]) {
+        $lastPaq = [];
+        foreach ($this->paqs as $i => $paq) {
+            if ('trackPageView' === $paq[0]) {
+                /*
+                 * It is recommended to "trackPageView" e.g. after setDocumentTitle.
+                 * See https://matomo.org/faq/how-to/how-do-i-set-a-custom-page-title-using-the-matomo-javascript-title/
+                 * So, let's rearrange the paqs
+                 */
+                $lastPaq = $paq;
+                unset($this->paqs[$i]);
+            }
+            if ('trackSiteSearch' === $paq[0]) {
                 /*
                  * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
                  * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
                  * or http://piwik.org/docs/site-search/#track-site-search-using-the-javascript-tracksitesearch-function.
                  */
-                return; // Do not add (an additional) 'trackPageView'
+                return; // Do not add 'trackPageView'
             }
         }
-
-        $this->paqs[] = ['trackPageView'];
+        if (!empty($lastPaq)) {
+            $this->paqs[] = $lastPaq; // move manually added 'trackPageView' to the end
+            $this->paqs = array_values($this->paqs);
+        } else {
+            $this->paqs[] = ['trackPageView'];
+        }
     }
 }
