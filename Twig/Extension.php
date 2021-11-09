@@ -109,13 +109,13 @@ EOT;
         $this->paqs[] = ['enableLinkTracking'];
 
         foreach ($this->paqs as $paq) {
-            if ('trackSiteSearch' === $paq[0]) {
+            if ('trackSiteSearch' === $paq[0] || 'trackPageView' === $paq[0]) {
                 /*
                  * It is recommended *not* to "trackPageView" for "trackSiteSearch" pages.
                  * See http://developer.piwik.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords
                  * or http://piwik.org/docs/site-search/#track-site-search-using-the-javascript-tracksitesearch-function.
                  */
-                return; // Do not add 'trackPageView'
+                return; // Do not add (an additional) 'trackPageView'
             }
         }
 
