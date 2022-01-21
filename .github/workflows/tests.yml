@@ -12,12 +12,13 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [7.2, 7.3, 7.4]
+                php: [7.2, 7.4, 8.0, 8.1]
         steps:
             -   uses: actions/checkout@v2
             -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
             -   run: mkdir -p build/logs
-            -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+            -   run: vendor/bin/phpunit
+            #-   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
             # Commented out Coveralls reporting until https://github.com/php-coveralls/php-coveralls/pull/275 is resolved
             #-   run: tools/php-coveralls --verbose
             #    env:

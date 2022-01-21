@@ -29,7 +29,7 @@
         "twig/twig": "^1.34|^2.0|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~7.0",
+        "phpunit/phpunit": "^8.5",
         "symfony/phpunit-bridge": "*"
     },
     "config": {

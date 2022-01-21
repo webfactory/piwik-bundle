@@ -10,26 +10,26 @@ class ExtensionTest extends TestCase
     public function testPiwikCodeReturnsNoScriptWhenDisabled()
     {
         $extension = new Extension(true, 1, '', false);
-        $this->assertNotContains('script', $extension->piwikCode());
+        self::assertStringNotContainsString('script', $extension->piwikCode());
     }
 
     public function testPiwikCodeReturnsScript()
     {
         $extension = new Extension(false, 1, '', false);
-        $this->assertContains('script', $extension->piwikCode());
+        self::assertStringContainsString('script', $extension->piwikCode());
     }
 
     public function testPiwikCodeContainsSiteId()
     {
         $siteId = 1234;
         $extension = new Extension(false, $siteId, '', false);
-        $this->assertContains((string) $siteId, $extension->piwikCode());
+        self::assertStringContainsString((string) $siteId, $extension->piwikCode());
     }
 
     public function testPiwikCodeContainsApiURL()
     {
         $extension = new Extension(false, 1, 'my.host', '/js/');
-        $this->assertContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
+        self::assertStringContainsString('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
     }
 
     public function testPiwikCodeDoesNotContainApiURL()
@@ -38,39 +38,39 @@ class ExtensionTest extends TestCase
         $hostname = 'myHost.de';
         $path = 'piwik.php';
         $extension = new Extension(false, $siteId, $hostname, $path);
-        $this->assertNotContains('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
+        self::assertStringNotContainsString('_paq.push([\'setAPIUrl\', u]);', $extension->piwikCode());
     }
 
     public function testPiwikCodeContainsHostName()
     {
         $hostname = 'myHost.de';
         $extension = new Extension(false, 1, $hostname, false);
-        $this->assertContains($hostname, $extension->piwikCode());
+        self::assertStringContainsString($hostname, $extension->piwikCode());
     }
 
     public function testAdditionalApiCallsCanBeAdded()
     {
         $extension = new Extension(false, 1, 'my.host', false);
         $extension->piwikPush('foo', 'bar', 'baz');
-        $this->assertContains('["foo","bar","baz"]', $extension->piwikCode());
+        self::assertStringContainsString('["foo","bar","baz"]', $extension->piwikCode());
     }
 
     public function testTrackPageViewEnabledByDefault()
     {
         $extension = new Extension(false, 1, 'my.host', false);
-        $this->assertContains('"trackPageView"', $extension->piwikCode());
+        self::assertStringContainsString('"trackPageView"', $extension->piwikCode());
     }
 
     public function testCookiesCanBeDisabled()
     {
         $extension = new Extension(false, 1, 'my.host', false);
-        $this->assertContains('"disableCookies"', $extension->piwikCode());
+        self::assertStringContainsString('"disableCookies"', $extension->piwikCode());
     }
 
     public function testCookiesCanBeEnabled()
     {
         $extension = new Extension(false, 1, 'my.host', false, false);
-        $this->assertNotContains('"disableCookies"', $extension->piwikCode());
+        self::assertStringNotContainsString('"disableCookies"', $extension->piwikCode());
     }
 
     public function testTrackSiteSearchDisablesPageTracking()
@@ -79,8 +79,8 @@ class ExtensionTest extends TestCase
         $extension->piwikPush('trackSiteSearch', 'Banana', 'Organic Food', 42);
 
         $code = $extension->piwikCode();
-        $this->assertContains('"trackSiteSearch"', $code);
-        $this->assertNotContains('"trackPageView"', $code);
+        self::assertStringContainsString('"trackSiteSearch"', $code);
+        self::assertStringNotContainsString('"trackPageView"', $code);
     }
 
     public function testIsTwigExtension()
