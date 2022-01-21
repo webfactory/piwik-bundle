@@ -22,8 +22,8 @@ final class ExtensionIntegrationTest extends TestCase
 
         $output = $this->renderWithExtension('{{ piwik_code() }}', new Extension(false, $siteId, $hostname, false));
 
-        $this->assertContains((string) $siteId, $output);
-        $this->assertContains($hostname, $output);
+        self::assertStringContainsString((string) $siteId, $output);
+        self::assertStringContainsString($hostname, $output);
     }
 
     public function testCustomApiCallsThroughPiwikFunction()
@@ -33,7 +33,7 @@ final class ExtensionIntegrationTest extends TestCase
             {{ piwik_code() }}
         ", new Extension(false, 1, 'my.host', false));
 
-        $this->assertContains('["foo","bar","baz"]', $output);
+        self::assertStringContainsString('["foo","bar","baz"]', $output);
     }
 
     private function renderWithExtension($templateString, ExtensionInterface $extension)

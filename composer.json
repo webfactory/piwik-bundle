@@ -29,8 +29,8 @@
         "twig/twig": "^1.34|^2.0|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~7.0",
-        "symfony/phpunit-bridge": "*"
+        "phpunit/phpunit": "^8.5",
+        "symfony/phpunit-bridge": ">= 4.4"
     },
     "config": {
         "sort-packages": true

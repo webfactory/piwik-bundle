@@ -1,25 +1,39 @@
-name: Run Tests
+name: Tests
 
 on:
     push:
-        branches: 
+        branches:
             - master
     pull_request:
 
+env:
+    SYMFONY_DEPRECATIONS_HELPER: weak
+
 jobs:
     PHPUnit:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
-                php: [7.2, 7.3, 7.4]
+                include:
+                    - { php-version: 7.2, symfony-locked-version: none, dependency-version: prefer-lowest }
+                    - { php-version: 7.4, symfony-locked-version: 4.4.*, dependency-version: prefer-stable }
+                    - { php-version: 8.1, symfony-locked-version: none, dependency-version: prefer-stable }
+        name: PHPUnit (PHP ${{matrix.php-version}}, Symfony Version Lock ${{ matrix.symfony-locked-version }}, ${{ matrix.dependency-version }})
         steps:
             -   uses: actions/checkout@v2
-            -   run: composer install --no-interaction --no-scripts --no-progress --no-suggest
-            -   run: mkdir -p build/logs
-            -   run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-            # Commented out Coveralls reporting until https://github.com/php-coveralls/php-coveralls/pull/275 is resolved
-            #-   run: tools/php-coveralls --verbose
-            #    env:
-            #        COVERALLS_RUN_LOCALLY: 1
-            #        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+            -   uses: shivammathur/setup-php@v2
+                with:
+                  php-version: ${{ matrix.php-version }}
+                  tools: composer:v2
+            -   uses: actions/cache@v2
+                with:
+                    path: vendor
+                    key: composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-locked-version }}-${{ matrix.dependency-version }}-${{ hashFiles('composer.json') }}
+                    restore-keys: |
+                        composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-locked-version }}-${{ matrix.dependency-version }}-
+            -   run: VERSION=${{ matrix.symfony-locked-version }} .github/workflows/lock-symfony-version.sh
+                if: matrix.symfony-locked-version != 'none'
+            -   run: composer update --${{ matrix.dependency-version }} --no-interaction --no-scripts --no-progress --ansi
+            -   run: composer show
+            -   run: vendor/bin/phpunit
