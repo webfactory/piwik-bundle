@@ -129,7 +129,6 @@ EOT;
         }
         if (null !== $manuallyAddedTrackPageView) {
             $this->paqs[] = $manuallyAddedTrackPageView; // move manually added 'trackPageView' to the end
-            $this->paqs = array_values($this->paqs);
         } else {
             $this->paqs[] = ['trackPageView'];
         }
