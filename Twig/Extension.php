@@ -46,7 +46,7 @@ class Extension extends AbstractExtension
         $this->disableCookies = $disableCookies;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('piwik_code', [$this, 'piwikCode'], ['is_safe' => ['html']]),
@@ -54,12 +54,12 @@ class Extension extends AbstractExtension
         ];
     }
 
-    public function piwikPush(...$paqs)
+    public function piwikPush(...$paqs): void
     {
         $this->paqs[] = $paqs;
     }
 
-    public function piwikCode()
+    public function piwikCode(): string
     {
         if ($this->disabled) {
             return '<!-- Piwik is disabled due to webfactory_piwik.disabled=true in your configuration -->';
