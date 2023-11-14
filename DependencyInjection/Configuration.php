@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('tracker_path')->defaultValue('/js/')->end()
             ->scalarNode('site_id')->isRequired()->end()
             ->scalarNode('disable_cookies')->defaultValue(true)->end()
+            ->scalarNode('enable_do_not_track')->defaultValue(true)->info('Include ["setDoNotTrack", true] in default _paqs')->end()
             ->end();
 
         return $treeBuilder;

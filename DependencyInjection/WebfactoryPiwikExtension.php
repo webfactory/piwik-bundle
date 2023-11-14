@@ -18,7 +18,7 @@ class WebfactoryPiwikExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        foreach (['disabled', 'piwik_host', 'tracker_path', 'site_id', 'disable_cookies'] as $configParameterKey) {
+        foreach (['disabled', 'piwik_host', 'tracker_path', 'site_id', 'disable_cookies', 'enable_do_not_track'] as $configParameterKey) {
             $container->setParameter("webfactory_piwik.$configParameterKey", $config[$configParameterKey]);
         }
     }

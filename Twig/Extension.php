@@ -37,13 +37,17 @@ class Extension extends AbstractExtension
      */
     private $paqs = [];
 
-    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath, bool $disableCookies = true)
+    public function __construct(bool $disabled, string $siteId, string $piwikHost, string $trackerPath, bool $disableCookies = true, bool $enableDoNotTrack = true)
     {
         $this->disabled = $disabled;
         $this->siteId = $siteId;
         $this->piwikHost = rtrim($piwikHost, '/');
         $this->trackerPath = ltrim($trackerPath, '/');
         $this->disableCookies = $disableCookies;
+
+        if ($enableDoNotTrack) {
+            $this->paqs[] = ['setDoNotTrack', true];
+        }
     }
 
     public function getFunctions(): array
@@ -81,7 +85,6 @@ class Extension extends AbstractExtension
 <!-- Piwik -->
 <script type="text/javascript">//<![CDATA[
 var _paq = (_paq||[]).concat({$paq});
-_paq.push(["setDoNotTrack", true]);
 (function() {
     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{$this->piwikHost}/";
     _paq.push(["setTrackerUrl", u+"{$this->trackerPath}"]);
