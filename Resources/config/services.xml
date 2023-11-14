@@ -10,6 +10,7 @@
             <argument>%webfactory_piwik.piwik_host%</argument>
             <argument>%webfactory_piwik.tracker_path%</argument>
             <argument>%webfactory_piwik.disable_cookies%</argument>
+            <argument>%webfactory_piwik.enable_do_not_track%</argument>
             <tag name="twig.extension" />
         </service>
 
