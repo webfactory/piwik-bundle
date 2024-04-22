@@ -19,6 +19,8 @@ jobs:
                     - { php-version: 7.2, symfony-locked-version: none, dependency-version: prefer-lowest }
                     - { php-version: 7.4, symfony-locked-version: 4.4.*, dependency-version: prefer-stable }
                     - { php-version: 8.1, symfony-locked-version: none, dependency-version: prefer-stable }
+                    - { php-version: 8.2, symfony-locked-version: none, dependency-version: prefer-stable }
+                    - { php-version: 8.3, symfony-locked-version: none, dependency-version: prefer-stable }
         name: PHPUnit (PHP ${{matrix.php-version}}, Symfony Version Lock ${{ matrix.symfony-locked-version }}, ${{ matrix.dependency-version }})
         steps:
             -   uses: actions/checkout@v3
