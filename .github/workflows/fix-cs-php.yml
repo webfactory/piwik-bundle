@@ -9,11 +9,11 @@ name: Coding Standards
 jobs:
     open-pr-for-cs-violations:
         name: PHP-CS-Fixer
-        runs-on: ubuntu-20.04
+        runs-un: ubuntu-22.04
         if: github.actor != 'dependabot[bot]'
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ github.head_ref }}
 
