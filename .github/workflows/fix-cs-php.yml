@@ -9,7 +9,7 @@ name: Coding Standards
 jobs:
     open-pr-for-cs-violations:
         name: PHP-CS-Fixer
-        runs-un: ubuntu-22.04
+        runs-on: ubuntu-22.04
         if: github.actor != 'dependabot[bot]'
         steps:
             -   name: Checkout code
