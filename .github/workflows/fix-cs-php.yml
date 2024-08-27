@@ -23,6 +23,6 @@ jobs:
                     args: "fix --show-progress=dots"
 
             -   name: Commit and push back changes
-                uses: stefanzweifel/git-auto-commit-action@v4
+                uses: stefanzweifel/git-auto-commit-action@v5
                 with:
                     commit_message: "Fix CS with PHP-CS-Fixer"
