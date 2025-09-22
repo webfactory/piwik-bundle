@@ -55,6 +55,7 @@ class Extension extends AbstractExtension
         return [
             new TwigFunction('piwik_code', [$this, 'piwikCode'], ['is_safe' => ['html']]),
             new TwigFunction('piwik', [$this, 'piwikPush']),
+            new TwigFunction('piwik_opt_out_code', [$this, 'piwikOptOutCode'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -105,6 +106,14 @@ EOT;
 EOT;
 
         return $piwikCode;
+    }
+
+    public function piwikOptOutCode(): string
+    {
+        return <<<EOT
+<div id="matomo-opt-out"></div>
+<script src="https://{$this->piwikHost}/index.php?module=CoreAdminHome&action=optOutJS&divId=matomo-opt-out&language=auto&showIntro=1"></script>
+EOT;
     }
 
     private function addDefaultApiCalls()
