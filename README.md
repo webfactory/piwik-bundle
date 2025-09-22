@@ -37,6 +37,10 @@ Somewhere in your views, right before the closing `</body>` tag, insert
 
 This will add the appropriate Matomo tracking code as [described in the API reference](https://developer.matomo.org/api-reference/tracking-javascript#where-can-i-find-the-piwik-tracking-code).
 
+When you want to display the opt-out dialog as [described in the documentation](https://developer.matomo.org/guides/in-depth-opt-out#opt-out-using-the-matomo-javascript-tracker), use the following Twig code:
+
+    {{ piwik_opt_out_code() }}
+
 Configuration
 -------------
 You can configure the bundle in your `config.yml`. Full Example:
