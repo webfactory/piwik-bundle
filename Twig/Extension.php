@@ -112,7 +112,7 @@ EOT;
     {
         return <<<EOT
 <div id="matomo-opt-out"></div>
-<script src="https://{$this->piwikHost}/index.php?module=CoreAdminHome&action=optOutJS&divId=matomo-opt-out&language=auto&showIntro=1"></script>
+<script src="https://{$this->piwikHost}/index.php?module=CoreAdminHome&amp;action=optOutJS&amp;divId=matomo-opt-out&amp;language=auto&amp;showIntro=1"></script>
 EOT;
     }
 
