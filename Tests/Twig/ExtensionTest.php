@@ -48,6 +48,13 @@ class ExtensionTest extends TestCase
         self::assertStringContainsString($hostname, $extension->piwikCode());
     }
 
+    public function testPiwikOptOutCodeContainsHostName()
+    {
+        $hostname = 'myHost.de';
+        $extension = new Extension(false, 1, $hostname, false);
+        self::assertStringContainsString($hostname, $extension->piwikOptOutCode());
+    }
+
     public function testAdditionalApiCallsCanBeAdded()
     {
         $extension = new Extension(false, 1, 'my.host', false);
