@@ -5,15 +5,15 @@ namespace Webfactory\Bundle\PiwikBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class WebfactoryPiwikExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
         $locator = new FileLocator(__DIR__.'/../Resources/config');
-        $loader = new XmlFileLoader($container, $locator);
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, $locator);
+        $loader->load('services.php');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
