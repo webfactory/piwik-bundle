@@ -14,8 +14,9 @@ jobs:
             matrix:
                 include:
                     - { php-version: 8.1, symfony-version: 6.4.*, dependency-version: prefer-lowest }
-                    - { php-version: 8.1, symfony-version: 6.4.*, dependency-version: prefer-stable }
-                    - { php-version: 8.3, symfony-version: 7.*, dependency-version: prefer-stable }
+                    - { php-version: 8.3, symfony-version: 6.4.*, dependency-version: prefer-stable }
+                    - { php-version: 8.4, symfony-version: 7.*, dependency-version: prefer-stable }
+                    - { php-version: 8.4, symfony-version: 8.*, dependency-version: prefer-stable }
         name: PHPUnit (PHP ${{ matrix.php-version }}, Symfony version lock ${{ matrix.symfony-version }}, ${{ matrix.dependency-version }})
         steps:
             -   uses: actions/checkout@v4
