@@ -8,29 +8,8 @@ A Symfony Bundle that helps you to use the Matomo (formerly known as Piwik) Open
 
 It contains a Twig function that can insert the tracking code into your website. Plus, you can turn it off with a simple configuration switch so you don't track your dev environment.
 
+# Usage
 
-Installation
-------------
-
-    composer require webfactory/piwik-bundle
-
-And enable the bundle in `app/AppKernel.php`:
-
-```php
-<?php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Webfactory\Bundle\PiwikBundle\WebfactoryPiwikBundle(),
-    );
-}
-```
-
-Usage
------
 Somewhere in your views, right before the closing `</body>` tag, insert 
 
 	{{ piwik_code() }}
@@ -41,8 +20,8 @@ When you want to display the opt-out dialog as [described in the documentation](
 
     {{ piwik_opt_out_code() }}
 
-Configuration
--------------
+# Configuration
+
 You can configure the bundle in your `config.yml`. Full Example:
 
 ```yaml
@@ -60,8 +39,7 @@ webfactory_piwik:
     disable_cookies: true
 ```
 
-Add calls to the JavaScript tracker API
----------------------------------------
+# Add calls to the JavaScript tracker API
 
 The [JavaScript tracking API](http://developer.matomo.org/api-reference/tracking-javascript) provides a lot of methods
 for setting the page name, tracking search results, using custom variables and much more.
@@ -83,14 +61,12 @@ Note that when you call `trackSiteSearch`, this will automatically disable the `
 This is the [recommended](http://developer.matomo.org/api-reference/tracking-javascript#tracking-internal-search-keywords-categories-and-no-result-search-keywords)
 behaviour.
 
-Credits, Copyright and License
-------------------------------
+# Credits, Copyright and License
 
 This code was written by webfactory GmbH, Bonn, Germany. We're a software development
 agency with a focus on PHP (mostly [Symfony](http://github.com/symfony/symfony)). If you're a
 developer looking for new challenges, we'd like to hear from you!
 
 - <https://www.webfactory.de>
-- <https://twitter.com/webfactory>
 
-Copyright 2012 – 2020 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
+Copyright 2012 – 2025 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
