@@ -1,6 +1,4 @@
 composer.lock
-composer.phar
 vendor/
-.idea/
-build/
-.php-cs-fixer.cache
+.*.cache
+phpunit.xml
