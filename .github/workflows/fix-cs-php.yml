@@ -1,15 +1,18 @@
+# Update this by running
+# curl https://gist.githubusercontent.com/mpdude/804005e2bc7717bc36e4def876a5303d/raw/fix-php-cs.yml > .github/workflows/fix-cs-php.yml
+
+name: Coding Standards
+
 on:
     push:
         branches:
             - master
     pull_request:
 
-name: Coding Standards
-
 jobs:
-    open-pr-for-cs-violations:
-        name: PHP-CS-Fixer
-        runs-on: ubuntu-22.04
+    fix-cs-violations:
+        name: Apply PHP-CS-Fixer
+        runs-on: ubuntu-latest
         if: github.actor != 'dependabot[bot]'
         steps:
             -   name: Checkout code
@@ -18,7 +21,7 @@ jobs:
                     ref: ${{ github.head_ref }}
 
             -   name: Run PHP-CS-Fixer
-                uses: docker://ghcr.io/php-cs-fixer/php-cs-fixer:3.62.0-php8.3
+                uses: docker://ghcr.io/php-cs-fixer/php-cs-fixer:3.89.2-php8.4
                 with:
                     args: "fix --show-progress=dots"
 
