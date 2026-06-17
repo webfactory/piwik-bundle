@@ -19,13 +19,13 @@ jobs:
                     - { php-version: 8.4, symfony-version: 8.*, dependency-version: prefer-stable }
         name: PHPUnit (PHP ${{ matrix.php-version }}, Symfony version lock ${{ matrix.symfony-version }}, ${{ matrix.dependency-version }})
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v6
             -   uses: shivammathur/setup-php@v2
                 with:
                   php-version: ${{ matrix.php-version }}
                   coverage: none
                   tools: composer:v2, flex
-            -   uses: actions/cache@v4
+            -   uses: actions/cache@v5
                 with:
                     path: vendor
                     key: composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-version }}-${{ matrix.dependency-version }}-${{ hashFiles('composer.json') }}
