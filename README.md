@@ -2,7 +2,7 @@
 ============
 
 [![Run Tests](https://github.com/webfactory/piwik-bundle/workflows/Run%20Tests/badge.svg)](https://github.com/webfactory/piwik-bundle/workflows/)
-[![Coverage Status](https://coveralls.io/repos/webfactory/piwik-bundle/badge.png?branch=master)](https://coveralls.io/r/webfactory/piwik-bundle?branch=master)
+[![Coverage Status](https://coveralls.io/repos/webfactory/piwik-bundle/badge.png?branch=main)](https://coveralls.io/r/webfactory/piwik-bundle?branch=main)
 
 A Symfony Bundle that helps you to use the Matomo (formerly known as Piwik) Open Analytics Platform with your project.
 
